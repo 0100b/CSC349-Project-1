@@ -2,6 +2,7 @@
 #include <limits>
 #include <algorithm> // For std::min_element, std::max_element
 #include <vector>    // For std::vector
+#include <iostream>
 
 /**
  * SELECTION SORT
@@ -35,16 +36,55 @@ std::vector<int> SelectionSort(std::vector<int> A)
 std::vector<int> Merge(std::vector<int> left, std::vector<int> right)
 {
     std::vector<int> result;
+
+    size_t i = 0; // left idx
+    size_t j = 0; // right idx
+
     // C++ HINT: Use two size_t variables (i and j) to track your position in
     // the left and right vectors.
 
     // TODO: Compare left[i] and right[j], push the smaller one to 'result'
     // Don't forget to push any remaining elements after one side is empty!
+    int l_s = left.size();
+    int r_s = right.size();
 
-    int n = left.size() + right.size();
+    while (i < l_s && j < r_s)
+    {
+        if (left[i] == right[j])
+        {
+            result.push_back(left[i]);
+            result.push_back(right[j]);
+            i += 1;
+            j += 1;
+        }
+        else if (left[i] < right[j])
+        {
+            result.push_back(left[i]);
+            i += 1;
+        }
+        else
+        {
+            result.push_back(right[j]);
+            j += 1;
+        }
+    }
 
-    size_t i = 0; // left idx
-    size_t j = 0; // right idx
+    if (i == l_s)
+    {
+        while (j < r_s)
+        {
+            result.push_back(right[j]);
+            j += 1;
+        }
+    }
+    else
+    {
+        while (i < l_s)
+        {
+            result.push_back(left[i]);
+            i += 1;
+        }
+    }
 
     return result;
 }
@@ -87,6 +127,7 @@ std::vector<int> MergeSort(std::vector<int> A)
  */
 std::vector<int> CountingSort(std::vector<int> A)
 {
+    std::vector<int> B;
     if (A.empty())
         return {};
 
@@ -101,6 +142,15 @@ std::vector<int> CountingSort(std::vector<int> A)
     // 1. Find min and max values in A
     // 2. Create a frequency vector 'T' initialized to zeros: std::vector<int> T(range, 0);
     // 3. Fill B by iterating through T and adding the original values back in order
+    int max = *std::max_element(A.begin(), A.begin() + A.size());
+    int min = *std::min_element(A.begin(), A.begin() + A.size());
+    int range = max - min + 1;
+
+    std::vector<int> T(range, 0); // freq vector
+    for (int i = i - min; i < A.size(); i++)
+    {
+        T[i] += i;
+    }
 
     return {};
 }

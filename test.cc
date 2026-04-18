@@ -14,6 +14,18 @@ bool verify(std::string name, std::vector<int> result, std::vector<int> expected
     }
     else
     {
+        std::cout << "Result:";
+        for (int x : result)
+            std::cout << x << " ";
+
+        std::cout << "\n";
+
+        std::cout << "Expected:";
+        for (int x : expected)
+            std::cout << x << " ";
+
+        std::cout << "\n------------------------------------" << std::endl;
+
         std::cout << "  [FAIL] " << name << " (Result did not match expected output)" << std::endl;
         return false;
     }
@@ -28,8 +40,8 @@ void run_suite(std::string test_name, std::vector<int> input)
     std::sort(expected.begin(), expected.end());
 
     verify("SelectionSort", SelectionSort(input), expected);
-    // verify("MergeSort", MergeSort(input), expected);
-    // verify("CountingSort",  CountingSort(input),  expected);
+    verify("MergeSort", MergeSort(input), expected);
+    verify("CountingSort", CountingSort(input), expected);
     std::cout << "------------------------------------" << std::endl;
 }
 

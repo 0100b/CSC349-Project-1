@@ -29,10 +29,10 @@ int main()
         std::chrono::duration<double, std::milli> diff_sel = end - start;
 
         // Measure Merge Sort
-        // start = std::chrono::high_resolution_clock::now();
-        // MergeSort(data);
-        // end = std::chrono::high_resolution_clock::now();
-        // std::chrono::duration<double, std::milli> diff_merge = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        MergeSort(data);
+        end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> diff_merge = end - start;
 
         // Measure Counting Sort
         // start = std::chrono::high_resolution_clock::now();
