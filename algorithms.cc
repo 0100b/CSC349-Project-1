@@ -7,17 +7,23 @@
  * SELECTION SORT
  * Logic: Find the smallest, move it to the new list, repeat.
  */
-std::vector<int> SelectionSort(std::vector<int> A) {
+std::vector<int> SelectionSort(std::vector<int> A)
+{
     std::vector<int> B;
-
-    while (!A.empty()) {
-        /* C++ HINT: 
+    int start = 0;
+    while (!A.empty())
+    {
+        /* C++ HINT:
            1. Use std::min_element(A.begin(), A.end()) to find the "iterator" to the minimum.
            2. To get the actual integer value from an iterator 'it', use *it.
            3. To remove an element by its iterator, use A.erase(it).
         */
-        
         // TODO: Find min, push to B, erase from A
+        auto i = std::min_element(A.begin(), A.end());
+        int min = *i;
+
+        B.push_back(min);
+        A.erase(i);
     }
     return B;
 }
@@ -26,13 +32,19 @@ std::vector<int> SelectionSort(std::vector<int> A) {
  * MERGE (Helper for MergeSort)
  * Logic: Combine two already-sorted lists into one.
  */
-std::vector<int> Merge(std::vector<int> left, std::vector<int> right) {
+std::vector<int> Merge(std::vector<int> left, std::vector<int> right)
+{
     std::vector<int> result;
-    // C++ HINT: Use two size_t variables (i and j) to track your position in 
+    // C++ HINT: Use two size_t variables (i and j) to track your position in
     // the left and right vectors.
-    
+
     // TODO: Compare left[i] and right[j], push the smaller one to 'result'
     // Don't forget to push any remaining elements after one side is empty!
+
+    int n = left.size() + right.size();
+
+    size_t i = 0; // left idx
+    size_t j = 0; // right idx
 
     return result;
 }
@@ -41,9 +53,16 @@ std::vector<int> Merge(std::vector<int> left, std::vector<int> right) {
  * MERGE SORT
  * Logic: Split in half, recurse, then merge.
  */
-std::vector<int> MergeSort(std::vector<int> A) {
+std::vector<int> MergeSort(std::vector<int> A)
+{
+    int n = A.size(); // size of A
+    int mid = floor(n / 2);
     // Base Case: A list of 1 (or 0) is already sorted
-    if (A.size() <= 1) return A;
+
+    if (n <= 1)
+    {
+        return A;
+    }
 
     /* C++ HINT:
        To "slice" a vector in C++, you can use this constructor:
@@ -51,26 +70,30 @@ std::vector<int> MergeSort(std::vector<int> A) {
        Example: std::vector<int> left(A.begin(), A.begin() + mid);
     */
 
-    // TODO: 
+    // TODO:
     // 1. Find the middle index
     // 2. Create 'left' and 'right' vectors using the slice hint above
     // 3. Recursive calls: MergeSort(left) and MergeSort(right)
     // 4. Return Merge() of the two sorted results
+    std::vector<int> left_half(A.begin(), A.begin() + mid);
+    std::vector<int> right_half(A.begin() + mid, A.begin() + n);
 
-    return A; 
+    return Merge(MergeSort(left_half), MergeSort(right_half));
 }
 
 /**
  * COUNTING SORT
  * Logic: Count how many times each number appears.
  */
-std::vector<int> CountingSort(std::vector<int> A) {
-    if (A.empty()) return {};
+std::vector<int> CountingSort(std::vector<int> A)
+{
+    if (A.empty())
+        return {};
 
     /* C++ HINT:
        1. To handle negative numbers, find the min and max values first.
        2. Your range is (max - min + 1).
-       3. When counting, the index for value 'x' in your frequency vector 
+       3. When counting, the index for value 'x' in your frequency vector
           should be (x - min_value).
     */
 
@@ -79,5 +102,5 @@ std::vector<int> CountingSort(std::vector<int> A) {
     // 2. Create a frequency vector 'T' initialized to zeros: std::vector<int> T(range, 0);
     // 3. Fill B by iterating through T and adding the original values back in order
 
-    return {}; 
+    return {};
 }
