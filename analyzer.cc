@@ -35,15 +35,15 @@ int main()
         std::chrono::duration<double, std::milli> diff_merge = end - start;
 
         // Measure Counting Sort
-        // start = std::chrono::high_resolution_clock::now();
-        // CountingSort(data);
-        // end = std::chrono::high_resolution_clock::now();
-        // std::chrono::duration<double, std::milli> diff_count = end - start;
+        start = std::chrono::high_resolution_clock::now();
+        CountingSort(data);
+        end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> diff_count = end - start;
 
         std::cout << n << ","
-                  << diff_sel.count() << "," << std::endl;
-        //   << diff_merge.count() << ","
-        //   << diff_count.count() << std::endl;
+                  << diff_sel.count() << ","
+                  << diff_merge.count() << ","
+                  << diff_count.count() << std::endl;
     }
 
     return 0;
