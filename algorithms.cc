@@ -142,15 +142,24 @@ std::vector<int> CountingSort(std::vector<int> A)
     // 1. Find min and max values in A
     // 2. Create a frequency vector 'T' initialized to zeros: std::vector<int> T(range, 0);
     // 3. Fill B by iterating through T and adding the original values back in order
+
     int max = *std::max_element(A.begin(), A.begin() + A.size());
     int min = *std::min_element(A.begin(), A.begin() + A.size());
     int range = max - min + 1;
-
     std::vector<int> T(range, 0); // freq vector
-    for (int i = i - min; i < A.size(); i++)
+
+    for (int a = 0; a < A.size(); a++)
     {
-        T[i] += i;
+        T[A[a] - min] += 1;
     }
 
-    return {};
+    for (int i = 0; i < range; i++)
+    {
+        for (int j = 0; j < T[i]; j++)
+        {
+            B.push_back(i + min);
+        }
+    }
+
+    return B;
 }
